@@ -2,7 +2,7 @@
 
 import { Shield, Heart, Users, Clock, ArrowUpRight, Sparkles, Star, CheckCircle } from 'lucide-react';
 import { useState } from 'react';
-import homeinsurance from "../public/assets/homeinsurance.jpg"
+const homeinsurance = "https://res.cloudinary.com/dy2gwtbjb/image/upload/v1748417985/homeinsurance_awmjul.jpg"
 const products = [
   {
     id: 1,
@@ -109,7 +109,7 @@ export default function ProductsSection() {
                   {/* Image section */}
                   <div className="relative lg:w-2/5 h-64 lg:h-auto overflow-hidden">
                     <img
-                      src={typeof product.image === 'string' ? product.image : product.image.src}
+                      src={product.image}
                       alt={product.title}
                       className={`
                         w-full h-full object-cover transition-all duration-700 ease-out
