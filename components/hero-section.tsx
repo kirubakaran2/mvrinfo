@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback, useMemo } from "react";
 
 // Sample background image URL for demo
 const backgroundImageUrl =
@@ -22,18 +22,35 @@ export default function ProfessionalHero(): JSX.Element {
   const [customerCount, setCustomerCount] = useState<number>(0);
   const [hoveredService, setHoveredService] = useState<string | null>(null);
 
+  // Optimized counter with requestAnimationFrame
   useEffect(() => {
-    const timer = setInterval(() => {
-      setCustomerCount((prev) => {
-        if (prev < 15000) return prev + 500;
-        return 15000;
-      });
-    }, 50);
+    let animationId: number;
+    let startTime: number;
+    const duration = 3000; // 3 seconds
+    const targetCount = 15000;
 
-    return () => clearInterval(timer);
+    const animate = (currentTime: number) => {
+      if (!startTime) startTime = currentTime;
+      const elapsed = currentTime - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      
+      // Easing function for smoother animation
+      const easeOutCubic = 1 - Math.pow(1 - progress, 3);
+      const currentCount = Math.floor(easeOutCubic * targetCount);
+      
+      setCustomerCount(currentCount);
+      
+      if (progress < 1) {
+        animationId = requestAnimationFrame(animate);
+      }
+    };
+
+    animationId = requestAnimationFrame(animate);
+    return () => cancelAnimationFrame(animationId);
   }, []);
 
-  const services: Service[] = [
+  // Memoized services data
+  const services: Service[] = useMemo(() => [
     {
       name: "Fixed Deposits",
       type: "gif",
@@ -72,16 +89,37 @@ export default function ProfessionalHero(): JSX.Element {
       thumbnail:
         "https://res.cloudinary.com/dy2gwtbjb/video/upload/v1748412186/stocks_yrmryu.jpg",
     },
-  ];
+  ], []);
 
-  const stats: Stat[] = [
+  // Memoized stats data
+  const stats: Stat[] = useMemo(() => [
     { number: customerCount, label: "Happy Customers", suffix: "+" },
     { number: 2025, label: "Year of Excellence", suffix: "" },
     { number: 6, label: "Financial Services", suffix: "+" },
     { number: 24, label: "Hours Support", suffix: "/7" },
-  ];
+  ], [customerCount]);
 
-  const renderServiceMedia = (service: Service) => {
+  // Memoized hover handlers
+  const handleServiceHover = useCallback((serviceName: string) => {
+    setHoveredService(serviceName);
+  }, []);
+
+  const handleServiceLeave = useCallback(() => {
+    setHoveredService(null);
+  }, []);
+
+  // Optimized video error handler
+  const handleVideoError = useCallback((e: React.SyntheticEvent<HTMLVideoElement>) => {
+    const video = e.currentTarget;
+    const fallback = video.parentElement?.querySelector('.video-fallback') as HTMLElement;
+    if (fallback) {
+      video.style.display = 'none';
+      fallback.style.display = 'flex';
+    }
+  }, []);
+
+  // Memoized service media renderer
+  const renderServiceMedia = useCallback((service: Service) => {
     if (service.type === "gif") {
       return (
         <img
@@ -89,6 +127,7 @@ export default function ProfessionalHero(): JSX.Element {
           alt={service.name}
           className="w-full h-full object-contain rounded-lg"
           loading="lazy"
+          decoding="async"
         />
       );
     } else {
@@ -101,25 +140,15 @@ export default function ProfessionalHero(): JSX.Element {
             loop
             playsInline
             poster={service.thumbnail}
-            onError={(e) => {
-              console.error(`Video failed to load for ${service.name}:`, e);
-              e.currentTarget.style.display = "none";
-              if (e.currentTarget.nextElementSibling) {
-                (
-                  e.currentTarget.nextElementSibling as HTMLElement
-                ).style.display = "flex";
-              }
-            }}
+            preload="metadata"
+            onError={handleVideoError}
           >
             <source src={service.url} type="video/mp4" />
             Your browser does not support the video tag.
           </video>
 
           {/* Fallback placeholder */}
-          <div
-            className="absolute inset-0 bg-blue-100 rounded-lg flex items-center justify-center text-blue-600 font-semibold text-xs hidden"
-            style={{ display: "none" }}
-          >
+          <div className="video-fallback absolute inset-0 bg-blue-100 rounded-lg flex items-center justify-center text-blue-600 font-semibold text-xs hidden">
             {service.name
               .split(" ")
               .map((word) => word[0])
@@ -128,33 +157,29 @@ export default function ProfessionalHero(): JSX.Element {
         </div>
       );
     }
-  };
+  }, [handleVideoError]);
+
+  // Optimized background styles
+  const backgroundStyles = useMemo(() => ({
+    backgroundImage: `
+      url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23000000' fill-opacity='0.05'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E"),
+      linear-gradient(135deg, rgba(248, 250, 252, 0.8) 0%, rgba(219, 234, 254, 0.8) 100%),
+      url(${backgroundImageUrl})
+    `,
+    backgroundRepeat: "repeat, no-repeat, no-repeat",
+    backgroundSize: "60px 60px, cover, cover",
+    backgroundPosition: "top left, center center, center center",
+    willChange: "transform",
+  }), []);
 
   return (
-    <div className="bg-white">
+    <div className="bg-white" style={{ willChange: 'transform' }}>
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-slate-50 to-blue-50 py-12 sm:py-16 lg:py-32">
-        {/* Fixed background pattern */}
+      <section className="relative bg-gradient-to-br from-slate-50 to-blue-50 py-12 sm:py-16 lg:py-32 overflow-hidden">
+        {/* Optimized background */}
         <div
-          className="absolute inset-0"
-          style={{
-            backgroundImage: `
-              url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23000000' fill-opacity='0.05'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")
-            `,
-          }}
-        />
-        <div
-          className="absolute inset-0 opacity-10"
-          style={{
-            backgroundImage: `
-              url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23000000' fill-opacity='0.05'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E"),
-              url(${backgroundImageUrl})
-            `,
-            backgroundRepeat: "repeat, no-repeat",
-            backgroundSize: "60px 60px, cover",
-            backgroundPosition: "top left, center center",
-            backgroundAttachment: "fixed",
-          }}
+          className="absolute inset-0 opacity-30"
+          style={backgroundStyles}
         />
 
         <div className="container mx-auto px-4 sm:px-6 relative z-10">
@@ -198,9 +223,9 @@ export default function ProfessionalHero(): JSX.Element {
                   {services.map((service) => (
                     <div
                       key={service.name}
-                      className="flex flex-col items-center p-3 sm:p-4 bg-white rounded-xl shadow-md hover:shadow-lg transition-all duration-300 border border-gray-100 cursor-pointer"
-                      onMouseEnter={() => setHoveredService(service.name)}
-                      onMouseLeave={() => setHoveredService(null)}
+                      className="flex flex-col items-center p-3 sm:p-4 bg-white rounded-xl shadow-md hover:shadow-lg transition-all duration-300 border border-gray-100 cursor-pointer transform hover:scale-105"
+                      onMouseEnter={() => handleServiceHover(service.name)}
+                      onMouseLeave={handleServiceLeave}
                     >
                       <div className="w-12 h-12 sm:w-16 sm:h-16 mb-2 flex items-center justify-center overflow-hidden">
                         {renderServiceMedia(service)}
@@ -216,7 +241,7 @@ export default function ProfessionalHero(): JSX.Element {
 
             {/* Right Content - Stats */}
             <div className="relative mt-8 lg:mt-0">
-              <div className="bg-white rounded-2xl shadow-2xl p-6 sm:p-8 border border-gray-100 mx-2 sm:mx-0">
+              <div className="bg-white rounded-2xl shadow-2xl p-6 sm:p-8 border border-gray-100 mx-2 sm:mx-0 backdrop-blur-sm">
                 <div className="text-center mb-6 sm:mb-8">
                   <h3 className="text-xl sm:text-2xl font-bold text-gray-800 mb-2">
                     Performance Overview 2025
@@ -264,15 +289,15 @@ export default function ProfessionalHero(): JSX.Element {
                 </div>
               </div>
 
-              {/* Decorative elements - hidden on mobile for cleaner look */}
-              <div className="hidden sm:block absolute -top-4 -right-4 w-72 h-72 bg-blue-100 rounded-full mix-blend-multiply opacity-30 -z-10"></div>
-              <div className="hidden sm:block absolute -bottom-4 -left-4 w-72 h-72 bg-purple-100 rounded-full mix-blend-multiply opacity-30 -z-10"></div>
+              {/* Decorative elements - optimized */}
+              <div className="hidden sm:block absolute -top-4 -right-4 w-72 h-72 bg-blue-100 rounded-full mix-blend-multiply opacity-30 -z-10 will-change-transform"></div>
+              <div className="hidden sm:block absolute -bottom-4 -left-4 w-72 h-72 bg-purple-100 rounded-full mix-blend-multiply opacity-30 -z-10 will-change-transform"></div>
             </div>
           </div>
         </div>
 
-        {/* Bottom wave */}
-        <div className="absolute bottom-0 left-0 right-0">
+        {/* Optimized bottom wave */}
+        <div className="absolute bottom-0 left-0 right-0 will-change-transform">
           <svg viewBox="0 0 1440 120" className="w-full h-auto">
             <path
               fill="#ffffff"
