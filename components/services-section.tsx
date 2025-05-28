@@ -1,7 +1,7 @@
 "use client"
 
 import { ChevronRight, BarChart2, Briefcase, LineChart, Lightbulb, ArrowUpRight, Sparkles } from 'lucide-react';
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 const services = [
   {
@@ -48,8 +48,51 @@ const services = [
 
 export default function ServicesSection() {
   const [hoveredCard, setHoveredCard] = useState<number | null>(null);
+  const [isMobile, setIsMobile] = useState(false);
+  const sectionRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const checkIfMobile = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    checkIfMobile();
+    window.addEventListener('resize', checkIfMobile);
+
+    if (isMobile && sectionRef.current) {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('animate-fadeInUp');
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        {
+          threshold: 0.1,
+          rootMargin: '0px 0px -50px 0px'
+        }
+      );
+
+      const animatedElements = sectionRef.current.querySelectorAll('.scroll-animate');
+      animatedElements.forEach((el) => {
+        el.classList.add('opacity-0', 'translate-y-6', 'transition-all', 'duration-500', 'ease-out');
+        observer.observe(el);
+      });
+
+      return () => {
+        animatedElements.forEach((el) => observer.unobserve(el));
+        window.removeEventListener('resize', checkIfMobile);
+      };
+    }
+  }, [isMobile]);
+
   return (
-    <section className="relative py-24 bg-gradient-to-br from-slate-50 via-white to-emerald-50/30 dark:from-gray-900 dark:via-gray-800 dark:to-emerald-900/20 overflow-hidden">
+    <section 
+      ref={sectionRef}
+      className="relative py-24 bg-gradient-to-br from-slate-50 via-white to-emerald-50/30 dark:from-gray-900 dark:via-gray-800 dark:to-emerald-900/20 overflow-hidden"
+    >
       {/* Background decoration */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute -top-40 -right-40 w-80 h-80 rounded-full bg-gradient-to-br from-emerald-400/20 to-teal-400/20 blur-3xl"></div>
@@ -57,8 +100,8 @@ export default function ServicesSection() {
       </div>
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        {/* Enhanced header */}
-        <div className="text-center mb-20">
+        {/* Header with scroll animation */}
+        <div className="text-center mb-20 scroll-animate">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 text-sm font-medium mb-6">
             <Sparkles className="w-4 h-4" />
             Financial Excellence
@@ -73,32 +116,29 @@ export default function ServicesSection() {
           </p>
         </div>
 
-        {/* Enhanced services grid */}
+        {/* Services grid with staggered animations */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
           {services.map((service, index) => (
             <div
               key={service.id}
-              className="group relative"
+              className={`group relative scroll-animate`}
+              style={isMobile ? { transitionDelay: `${index * 100}ms` } : {}}
               onMouseEnter={() => setHoveredCard(service.id)}
               onMouseLeave={() => setHoveredCard(null)}
             >
-              {/* Card */}
               <div className={`
                 relative h-full bg-white/70 dark:bg-gray-800/70 backdrop-blur-sm rounded-2xl 
                 border border-gray-200/50 dark:border-gray-700/50
                 transition-all duration-500 ease-out
                 ${hoveredCard === service.id ? 'shadow-2xl shadow-emerald-500/20 scale-105 -translate-y-2' : 'shadow-lg hover:shadow-xl'}
               `}>
-                {/* Gradient overlay on hover */}
                 <div className={`
                   absolute inset-0 rounded-2xl opacity-0 transition-opacity duration-500
                   bg-gradient-to-br ${service.color}
                   ${hoveredCard === service.id ? 'opacity-5' : ''}
                 `}></div>
 
-                {/* Content */}
                 <div className="relative p-8">
-                  {/* Icon with enhanced styling */}
                   <div className="relative mb-6">
                     <div className={`
                       relative bg-gradient-to-br ${service.color} w-16 h-16 rounded-2xl 
@@ -108,7 +148,6 @@ export default function ServicesSection() {
                     `}>
                       <service.icon className="h-8 w-8 text-white" />
                       
-                      {/* Glow effect */}
                       <div className={`
                         absolute inset-0 rounded-2xl bg-gradient-to-br ${service.color} opacity-0 blur-xl 
                         transition-opacity duration-500
@@ -116,7 +155,6 @@ export default function ServicesSection() {
                       `}></div>
                     </div>
                     
-                    {/* Stats badge */}
                     <div className="absolute -top-2 -right-2">
                       <span className={`
                         inline-block px-3 py-1 text-xs font-semibold rounded-full
@@ -129,7 +167,6 @@ export default function ServicesSection() {
                     </div>
                   </div>
 
-                  {/* Text content */}
                   <h3 className="text-xl font-bold mb-3 text-gray-900 dark:text-white group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors duration-300">
                     {service.title}
                   </h3>
@@ -138,7 +175,6 @@ export default function ServicesSection() {
                     {service.description}
                   </p>
 
-                  {/* Enhanced CTA */}
                   <div className="flex items-center justify-between">
                     <button className={`
                       inline-flex items-center gap-2 text-sm font-semibold
@@ -159,7 +195,6 @@ export default function ServicesSection() {
                   </div>
                 </div>
 
-                {/* Animated border */}
                 <div className={`
                   absolute inset-0 rounded-2xl transition-opacity duration-500
                   bg-gradient-to-r ${service.color} p-[1px]
@@ -172,16 +207,14 @@ export default function ServicesSection() {
           ))}
         </div>
 
-        {/* Enhanced CTA section */}
-        <div className="text-center">
+        {/* CTA section with animation */}
+        <div className="text-center scroll-animate">
           <div className="inline-flex flex-col sm:flex-row items-center gap-4">
             <button className="group relative px-8 py-4 bg-gradient-to-r from-emerald-600 to-teal-600 text-white rounded-2xl font-semibold text-lg shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-105">
               <span className="relative z-10 flex items-center gap-2">
                 View All Services
                 <ArrowUpRight className="w-5 h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300" />
               </span>
-              
-              {/* Button glow effect */}
               <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-emerald-600 to-teal-600 opacity-0 group-hover:opacity-20 blur-xl transition-opacity duration-300"></div>
             </button>
             
@@ -195,6 +228,25 @@ export default function ServicesSection() {
           </p>
         </div>
       </div>
+
+      {/* Add global styles for the animation */}
+      <style jsx global>{`
+        @keyframes fadeInUp {
+          from {
+            opacity: 0;
+            transform: translateY(20px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+        .animate-fadeInUp {
+          opacity: 1 !important;
+          transform: translateY(0) !important;
+          animation: fadeInUp 0.6s ease-out forwards;
+        }
+      `}</style>
     </section>
   );
 }
