@@ -47,8 +47,7 @@ const services = [
 ];
 
 export default function ServicesSection() {
-  const [hoveredCard, setHoveredCard] = useState(null);
-
+  const [hoveredCard, setHoveredCard] = useState<number | null>(null);
   return (
     <section className="relative py-24 bg-gradient-to-br from-slate-50 via-white to-emerald-50/30 dark:from-gray-900 dark:via-gray-800 dark:to-emerald-900/20 overflow-hidden">
       {/* Background decoration */}
