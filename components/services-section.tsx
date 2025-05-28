@@ -279,11 +279,11 @@ export default function ServicesSection() {
         @media (max-width: 768px) {
           .scroll-hidden {
             transform: translateY(30px) scale(0.98);
-            transition: all 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
           }
           
           .animate-scroll-in {
-            animation: mobile-scroll-in 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            animation: mobile-scroll-in 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
           }
         }
 
