@@ -2,7 +2,8 @@
 import { useState, useEffect } from "react";
 
 // Sample background image URL for demo
-const backgroundImageUrl = "https://res.cloudinary.com/dy2gwtbjb/image/upload/v1748413601/background4_nkla4h.jpg";
+const backgroundImageUrl =
+  "https://res.cloudinary.com/dy2gwtbjb/image/upload/v1748413601/background4_nkla4h.jpg";
 
 interface Service {
   name: string;
@@ -33,47 +34,51 @@ export default function ProfessionalHero(): JSX.Element {
   }, []);
 
   const services: Service[] = [
-    { 
-      name: "Fixed Deposits", 
-      type: "gif", 
-      url: "https://res.cloudinary.com/dy2gwtbjb/image/upload/v1748412186/fixeddeposit_thhupe.gif" 
+    {
+      name: "Fixed Deposits",
+      type: "gif",
+      url: "https://res.cloudinary.com/dy2gwtbjb/image/upload/v1748412186/fixeddeposit_thhupe.gif",
     },
-    { 
-      name: "Health Insurance", 
-      type: "gif", 
-      url: "https://res.cloudinary.com/dy2gwtbjb/image/upload/v1748415598/healthinsurance_vd7enh.gif" 
+    {
+      name: "Health Insurance",
+      type: "gif",
+      url: "https://res.cloudinary.com/dy2gwtbjb/image/upload/v1748415598/healthinsurance_vd7enh.gif",
     },
-    { 
-      name: "Home Insurance", 
-      type: "video", 
+    {
+      name: "Home Insurance",
+      type: "video",
       url: "https://res.cloudinary.com/dy2gwtbjb/video/upload/v1748412186/homeinsurance_h3v70b.mp4",
-      thumbnail: "https://res.cloudinary.com/dy2gwtbjb/video/upload/v1748412186/homeinsurance_h3v70b.jpg"
+      thumbnail:
+        "https://res.cloudinary.com/dy2gwtbjb/video/upload/v1748412186/homeinsurance_h3v70b.jpg",
     },
-    { 
-      name: "Mutual Funds", 
-      type: "video", 
+    {
+      name: "Mutual Funds",
+      type: "video",
       url: "https://res.cloudinary.com/dy2gwtbjb/video/upload/v1748412186/mutualfunds_qx7yrj.mp4",
-      thumbnail: "https://res.cloudinary.com/dy2gwtbjb/video/upload/v1748412186/mutualfunds_qx7yrj.jpg"
+      thumbnail:
+        "https://res.cloudinary.com/dy2gwtbjb/video/upload/v1748412186/mutualfunds_qx7yrj.jpg",
     },
-    { 
-      name: "NPS", 
-      type: "video", 
+    {
+      name: "NPS",
+      type: "video",
       url: "https://res.cloudinary.com/dy2gwtbjb/video/upload/v1748412186/nps_oxpyp0.mp4",
-      thumbnail: "https://res.cloudinary.com/dy2gwtbjb/video/upload/v1748412186/nps_oxpyp0.jpg"
+      thumbnail:
+        "https://res.cloudinary.com/dy2gwtbjb/video/upload/v1748412186/nps_oxpyp0.jpg",
     },
-    { 
-      name: "Stocks", 
-      type: "video", 
+    {
+      name: "Stocks",
+      type: "video",
       url: "https://res.cloudinary.com/dy2gwtbjb/video/upload/v1748412186/stocks_yrmryu.mp4",
-      thumbnail: "https://res.cloudinary.com/dy2gwtbjb/video/upload/v1748412186/stocks_yrmryu.jpg"
-    }
+      thumbnail:
+        "https://res.cloudinary.com/dy2gwtbjb/video/upload/v1748412186/stocks_yrmryu.jpg",
+    },
   ];
 
   const stats: Stat[] = [
     { number: customerCount, label: "Happy Customers", suffix: "+" },
     { number: 2025, label: "Year of Excellence", suffix: "" },
     { number: 6, label: "Financial Services", suffix: "+" },
-    { number: 24, label: "Hours Support", suffix: "/7" }
+    { number: 24, label: "Hours Support", suffix: "/7" },
   ];
 
   const renderServiceMedia = (service: Service) => {
@@ -90,30 +95,35 @@ export default function ProfessionalHero(): JSX.Element {
       return (
         <div className="relative w-full h-full">
           <video
-  className="w-full h-full object-contain rounded-lg"
-  autoPlay
-  muted
-  loop
-  playsInline
-  poster={service.thumbnail}
-  onError={(e) => {
-    console.error(`Video failed to load for ${service.name}:`, e);
-    e.currentTarget.style.display = 'none';
-    if (e.currentTarget.nextElementSibling) {
-      (e.currentTarget.nextElementSibling as HTMLElement).style.display = 'flex';
-    }
-  }}
->
-  <source src={service.url} type="video/mp4" />
-  Your browser does not support the video tag.
-</video>
+            className="w-full h-full object-contain rounded-lg"
+            autoPlay
+            muted
+            loop
+            playsInline
+            poster={service.thumbnail}
+            onError={(e) => {
+              console.error(`Video failed to load for ${service.name}:`, e);
+              e.currentTarget.style.display = "none";
+              if (e.currentTarget.nextElementSibling) {
+                (
+                  e.currentTarget.nextElementSibling as HTMLElement
+                ).style.display = "flex";
+              }
+            }}
+          >
+            <source src={service.url} type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
 
           {/* Fallback placeholder */}
-          <div 
+          <div
             className="absolute inset-0 bg-blue-100 rounded-lg flex items-center justify-center text-blue-600 font-semibold text-xs hidden"
-            style={{ display: 'none' }}
+            style={{ display: "none" }}
           >
-            {service.name.split(' ').map(word => word[0]).join('')}
+            {service.name
+              .split(" ")
+              .map((word) => word[0])
+              .join("")}
           </div>
         </div>
       );
@@ -125,7 +135,7 @@ export default function ProfessionalHero(): JSX.Element {
       {/* Hero Section */}
       <section className="relative bg-gradient-to-br from-slate-50 to-blue-50 py-12 sm:py-16 lg:py-32">
         {/* Fixed background pattern */}
-        <div 
+        <div
           className="absolute inset-0"
           style={{
             backgroundImage: `
@@ -133,17 +143,17 @@ export default function ProfessionalHero(): JSX.Element {
             `,
           }}
         />
-        <div 
+        <div
           className="absolute inset-0 opacity-10"
           style={{
             backgroundImage: `
               url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23000000' fill-opacity='0.05'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E"),
               url(${backgroundImageUrl})
             `,
-            backgroundRepeat: 'repeat, no-repeat',
-            backgroundSize: '60px 60px, cover',
-            backgroundPosition: 'top left, center center',
-            backgroundAttachment: 'fixed',
+            backgroundRepeat: "repeat, no-repeat",
+            backgroundSize: "60px 60px, cover",
+            backgroundPosition: "top left, center center",
+            backgroundAttachment: "fixed",
           }}
         />
 
@@ -152,9 +162,11 @@ export default function ProfessionalHero(): JSX.Element {
             {/* Left Content */}
             <div className="space-y-6 lg:space-y-8 text-center lg:text-left">
               <div className="space-y-4 lg:space-y-6">
-                <div className="inline-flex items-center bg-blue-100 text-blue-800 px-3 sm:px-4 py-2 rounded-full text-xs sm:text-sm font-medium">
-                  <span className="w-2 h-2 bg-blue-500 rounded-full mr-2"></span>
-                  Trusted Financial Partner Since 2020
+                <div className="mt-4 sm:mt-0">
+                  <div className="inline-flex items-center bg-blue-100 text-blue-800 px-3 sm:px-4 py-2 rounded-full text-xs sm:text-sm font-medium">
+                    <span className="w-2 h-2 bg-blue-500 rounded-full mr-2"></span>
+                    Trusted Financial Partner Since 2020
+                  </div>
                 </div>
 
                 <h1 className="text-3xl sm:text-4xl lg:text-6xl font-bold text-gray-900 leading-tight px-2 sm:px-0">
@@ -209,7 +221,9 @@ export default function ProfessionalHero(): JSX.Element {
                   <h3 className="text-xl sm:text-2xl font-bold text-gray-800 mb-2">
                     Performance Overview 2025
                   </h3>
-                  <p className="text-sm sm:text-base text-gray-600">Building trust through excellence</p>
+                  <p className="text-sm sm:text-base text-gray-600">
+                    Building trust through excellence
+                  </p>
                 </div>
 
                 <div className="grid grid-cols-2 gap-4 sm:gap-6 mb-6 sm:mb-8">
@@ -222,7 +236,9 @@ export default function ProfessionalHero(): JSX.Element {
                         {index === 0
                           ? customerCount.toLocaleString()
                           : stat.number}
-                        <span className="text-lg sm:text-xl">{stat.suffix}</span>
+                        <span className="text-lg sm:text-xl">
+                          {stat.suffix}
+                        </span>
                       </div>
                       <div className="text-xs sm:text-sm text-gray-600 font-medium leading-tight">
                         {stat.label}
@@ -233,7 +249,9 @@ export default function ProfessionalHero(): JSX.Element {
 
                 <div className="p-4 sm:p-6 bg-red-50 rounded-xl border-l-4 border-red-500">
                   <div className="flex items-center">
-                    <span className="text-xl sm:text-2xl mr-3 flex-shrink-0">🔒</span>
+                    <span className="text-xl sm:text-2xl mr-3 flex-shrink-0">
+                      🔒
+                    </span>
                     <div>
                       <h4 className="text-base sm:text-lg font-semibold text-red-700 mb-1">
                         Secure Your Family's Future
@@ -272,7 +290,8 @@ export default function ProfessionalHero(): JSX.Element {
               Why Choose MVR Financial Services?
             </h2>
             <p className="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto px-4">
-              Professional expertise and personalized service for all your financial needs
+              Professional expertise and personalized service for all your
+              financial needs
             </p>
           </div>
 
@@ -281,18 +300,19 @@ export default function ProfessionalHero(): JSX.Element {
               {
                 icon: "🏠",
                 title: "Doorstep Service",
-                description: "Convenient consultation at your preferred location"
+                description:
+                  "Convenient consultation at your preferred location",
               },
               {
                 icon: "👨‍💼",
                 title: "Expert Advisors",
-                description: "Certified professionals with proven track record"
+                description: "Certified professionals with proven track record",
               },
               {
                 icon: "🔒",
                 title: "Trusted & Secure",
-                description: "Your financial security is our commitment"
-              }
+                description: "Your financial security is our commitment",
+              },
             ].map((feature) => (
               <div
                 key={feature.title}
@@ -304,7 +324,9 @@ export default function ProfessionalHero(): JSX.Element {
                 <h3 className="text-lg sm:text-xl font-semibold mb-3 sm:mb-4 text-gray-800">
                   {feature.title}
                 </h3>
-                <p className="text-sm sm:text-base text-gray-600">{feature.description}</p>
+                <p className="text-sm sm:text-base text-gray-600">
+                  {feature.description}
+                </p>
               </div>
             ))}
           </div>
