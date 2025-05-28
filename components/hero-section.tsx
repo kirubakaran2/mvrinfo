@@ -185,7 +185,7 @@ export default function ProfessionalHero(): JSX.Element {
                   Get Free Consultation
                 </button>
                 <button className="border-2 border-gray-300 hover:border-blue-600 text-gray-700 hover:text-blue-600 px-6 sm:px-8 py-3 sm:py-4 rounded-full text-base sm:text-lg font-semibold transition-colors w-full sm:w-auto">
-                  Call: +91 7092882645
+                  Call: +91 8608288247
                 </button>
               </div>
 
