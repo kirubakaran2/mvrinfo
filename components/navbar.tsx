@@ -73,17 +73,14 @@ export default function Navbar() {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 md:h-20">
           {/* Logo */}
-          <div className="flex-shrink-0">
-            <Link href="/" className="flex items-center space-x-2">
-              <div className="h-14 w-14 rounded-full bg-black flex items-center justify-center overflow-hidden">
-                <img
-                  src={logo}
-                  alt="MVR Info Logo"
-                  className="h-10 w-10 object-contain"
-                />
-              </div>
-            </Link>
-          </div>
+<div className="flex-shrink-0">
+  <Link href="/" className="flex items-center justify-center">
+    <div className="h-14 w-14 bg-black flex items-center justify-center rounded-tl-lg rounded-br-xl overflow-hidden">
+      <img src={logo} alt="MVR Info Logo" className="h-12 w-12 object-contain" />
+    </div>
+  </Link>
+</div>
+
 
           {/* Desktop Nav */}
           <div className="hidden md:flex items-center space-x-1">
