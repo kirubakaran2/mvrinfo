@@ -1,7 +1,7 @@
 "use client"
 
 import Image from 'next/image';
-import { motion } from '@/components/motion';
+import { motion } from 'framer-motion';
 import { 
   Award, 
   TrendingUp, 
