@@ -60,11 +60,11 @@ export default function Footer() {
               </li>
               <li className="flex items-center">
                 <Phone size={18} className="mr-2 text-emerald-600 flex-shrink-0" />
-                <a href="tel:+917092882645" className="text-gray-600 dark:text-gray-400 hover:text-emerald-600 dark:hover:text-emerald-400">+91 98765 43210</a>
+                <a href="tel:+918608288247" className="text-gray-600 dark:text-gray-400 hover:text-emerald-600 dark:hover:text-emerald-400">+91 8608288247</a>
               </li>
               <li className="flex items-center">
                 <Mail size={18} className="mr-2 text-emerald-600 flex-shrink-0" />
-                <a href="mailto:info@mvrinfo.com" className="text-gray-600 dark:text-gray-400 hover:text-emerald-600 dark:hover:text-emerald-400">info@mvrinfo.com</a>
+                <a href="mailto:info@mvrinfo.com" className="text-gray-600 dark:text-gray-400 hover:text-emerald-600 dark:hover:text-emerald-400">infotechpvtltdmvr@gmail.com</a>
               </li>
             </ul>
           </div>

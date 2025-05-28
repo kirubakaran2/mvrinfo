@@ -24,7 +24,7 @@ export default function WhatsAppButton() {
       isVisible ? 'opacity-100' : 'opacity-0'
     }`}>
       <a
-        href="https://wa.me/917092882645?text=Hello%20MVR%20Info,%20I'm%20interested%20in%20your%20services."
+        href="https://wa.me/918428821841?text=Hello%20MVR%20Info,%20I'm%20interested%20in%20your%20services."
         target="_blank"
         rel="noopener noreferrer"
         className="flex items-center justify-center w-14 h-14 bg-green-500 rounded-full shadow-lg hover:bg-green-600 transition-all duration-300 hover:scale-110"

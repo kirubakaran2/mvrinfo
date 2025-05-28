@@ -11,7 +11,7 @@ const testimonials = [
     name: "Priya Sharma",
     role: "Business Owner",
     content: "MVR Info transformed how I plan for my family's future. Their expert guidance on life insurance and investment options has given me peace of mind and financial security.",
-    avatar: "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+    avatar: "https://img.freepik.com/free-photo/painting-woman-s-portrait_23-2151155326.jpg"
   },
   {
     id: 2,
@@ -32,7 +32,7 @@ const testimonials = [
     name: "Vikram Singh",
     role: "Retired Government Employee",
     content: "After retirement, I needed to ensure my savings would last. MVR Info restructured my portfolio for stable income while preserving capital. Their advice has been invaluable.",
-    avatar: "https://images.pexels.com/photos/2269872/pexels-photo-2269872.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+    avatar: "https://img.freepik.com/free-photo/full-shot-old-man-sitting-bench_23-2150493050.jpg"
   }
 ];
 
