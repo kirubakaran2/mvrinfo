@@ -322,7 +322,7 @@ export default function ProductsSection() {
           opacity: 0;
           transform: translateY(40px) scale(0.95);
           filter: blur(2px);
-          transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+          transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
         
         .animate-scroll-in {
@@ -339,7 +339,7 @@ export default function ProductsSection() {
           }
           50% {
             opacity: 0.2;
-            transform: scale(1.05);
+            transform: scale(1.0);
           }
         }
         
@@ -356,7 +356,7 @@ export default function ProductsSection() {
         @media (max-width: 768px) {
           .scroll-hidden {
             transform: translateY(30px) scale(0.98);
-            transition: all 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
           }
           
           .animate-scroll-in {
@@ -411,7 +411,7 @@ export default function ProductsSection() {
 
         /* Enhanced image hover effects */
         .group img {
-          transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+          transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
         }
       `}</style>
     </>
