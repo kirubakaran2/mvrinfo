@@ -1,6 +1,6 @@
 "use client"
 
-import { motion } from '@/components/motion';
+import { motion } from 'framer-motion';
 import { 
   LineChart, 
   TrendingUp, 
