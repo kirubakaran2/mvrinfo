@@ -75,7 +75,7 @@ export default function Navbar() {
           {/* Logo */}
           <div className="flex-shrink-0">
             <Link href="/" className="flex items-center space-x-2">
-              <div className="h-12 w-12 rounded-full bg-black flex items-center justify-center overflow-hidden">
+              <div className="h-16 w-16 rounded-full bg-black flex items-center justify-center overflow-hidden">
                 <img
                   src={logo}
                   alt="MVR Info Logo"
