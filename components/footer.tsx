@@ -56,11 +56,11 @@ export default function Footer() {
             <ul className="space-y-2">
               <li className="flex items-start">
                 <MapPin size={18} className="mr-2 text-emerald-600 mt-0.5 flex-shrink-0" />
-                <span className="text-gray-600 dark:text-gray-400">123 Financial Street, Mumbai, India 400001</span>
+                <span className="text-gray-600 dark:text-gray-400">No 39 pinjala Subramaniam street tnagar Chennai 600024</span>
               </li>
               <li className="flex items-center">
                 <Phone size={18} className="mr-2 text-emerald-600 flex-shrink-0" />
-                <a href="tel:+919876543210" className="text-gray-600 dark:text-gray-400 hover:text-emerald-600 dark:hover:text-emerald-400">+91 98765 43210</a>
+                <a href="tel:+917092882645" className="text-gray-600 dark:text-gray-400 hover:text-emerald-600 dark:hover:text-emerald-400">+91 98765 43210</a>
               </li>
               <li className="flex items-center">
                 <Mail size={18} className="mr-2 text-emerald-600 flex-shrink-0" />
