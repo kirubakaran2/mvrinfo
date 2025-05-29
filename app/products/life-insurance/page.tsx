@@ -358,7 +358,7 @@ export default function Home() {
         <h1 className="text-4xl sm:text-6xl lg:text-8xl font-black mb-8 leading-tight text-white drop-shadow-2xl">
           Life Insurance -
           <br />
-          <span className="text-black drop-shadow-lg">Invest</span>
+          <span className="text-black drop-shadow-lg">Invest </span>
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-cyan-400 to-blue-400 drop-shadow-lg">
             and Protect
           </span>
