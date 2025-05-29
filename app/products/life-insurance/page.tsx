@@ -330,7 +330,7 @@ export default function Home() {
       {/* Hero Section */}
 <section
   id="home"
-  className="min-h-screen flex items-center relative z-10 pt-10"
+  className="min-h-screen flex items-center relative z-10 pt-2"
   style={{
     backgroundImage: 'url(https://img.freepik.com/free-vector/gradient-blur-pink-blue-abstract-background_53876-117324.jpg)',
     backgroundSize: 'cover',
