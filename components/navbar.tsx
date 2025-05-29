@@ -5,7 +5,7 @@ import Link from "next/link";
 import { Menu, X, ChevronDown, ChevronUp } from "lucide-react";
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
 const logo =
-  "https://res.cloudinary.com/dy2gwtbjb/image/upload/v1748418186/logo_vk74wp.png";
+  "https://res.cloudinary.com/dy2gwtbjb/image/upload/v1748512885/logopic_x6cajm.png";
 
 const links = [
   { name: "Home", href: "/" },
@@ -75,11 +75,12 @@ export default function Navbar() {
           {/* Logo */}
 <div className="flex-shrink-0">
   <Link href="/" className="flex items-center justify-center">
-    <div className="h-14 w-14 bg-black flex items-center justify-center rounded-tl-lg rounded-br-xl overflow-hidden">
-      <img src={logo} alt="MVR Info Logo" className="h-12 w-12 object-contain" />
+    <div className="h-24 w-24 flex items-center justify-center rounded-tl-lg rounded-br-xl overflow-hidden">
+      <img src={logo} alt="MVR Info Logo" className="h-20 w-20 object-contain" />
     </div>
   </Link>
 </div>
+
 
 
           {/* Desktop Nav */}
